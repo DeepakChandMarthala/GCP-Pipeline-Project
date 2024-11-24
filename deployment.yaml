@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: gcr.io/$PROJECT_ID/app-image:latest
+        image: gcr.io/$PROJECT_ID/app-image:$TAG_NAME
         ports:
         - containerPort: 5000
+
