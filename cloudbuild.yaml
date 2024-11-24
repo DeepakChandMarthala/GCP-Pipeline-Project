@@ -1,4 +1,3 @@
-
 steps:
   # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
@@ -9,6 +8,16 @@ steps:
     args: ['push', 'gcr.io/$PROJECT_ID/app-image:$SHORT_SHA']
 
   # Step 3: Deploy the updated image to GKE
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args:
+    - 'apply'
+    - '-f'
+    - 'deployment.yaml'
+    env:
+    - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=my-cluster'
+
+  # Step 4: Update the image in the deployment
   - name: 'gcr.io/cloud-builders/kubectl'
     args:
     - 'set'
@@ -25,6 +34,7 @@ substitutions:
 
 options:
   logging: CLOUD_LOGGING_ONLY
+
   
 # steps:
 #   # Step 1: Build the Docker image
