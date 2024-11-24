@@ -34,5 +34,7 @@ steps:
     args: ['push', 'gcr.io/$PROJECT_ID/app-image:$SHORT_SHA']
 
 images:
-  # Specify the image to push to GCR
   - 'gcr.io/$PROJECT_ID/app-image:$SHORT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
